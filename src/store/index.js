@@ -1,41 +1,50 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import notes from './modules/notes'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    notesArray: [],
+    lang: {
+      en: {
+        ADDSHEET: "ADD SHEET",
+        LANG: "EN",
+      },
+      ua: {
+        ADDSHEET: "ДОДАТИ АРКУШ",
+        LANG: "UA",
+      },
+      ru: {
+        ADDSHEET: "ДОБАВИТЬ ЛИСТ",
+        LANG: "RU",
+      },
+    },
+    selectedLang: 'en',
   },
   mutations: {
-    addNote(state) {
-      state.notesArray.push({
-        titleNote: 'назва примітки',
-        content: 'зміст',
-      })
-    },
-    startNotesArray(state, arr){
-      state.notesArray = arr.slice()
-    },
-    deleteNotesArray(state, key){
-      state.notesArray.splice(key, 1)
-    },
-  },
-  actions: {
-    mountNotes(ctx) {
-      if(!window.localStorage.getItem("notes-array")) {
-        return;
-      }
-      let arr = JSON.parse(window.localStorage.getItem("notes-array"));
-      ctx.commit("startNotesArray", arr);
-    },
-    deleteNote(ctx, key) {
-      ctx.commit("deleteNotesArray", key);
+    changeLang (state, lang) {
+      state.selectedLang = lang;
     }
   },
-  getters: {
-    getNotesArray(state) {
-      return state.notesArray;
+  actions: {
+    startLang (ctx) {
+      if(!window.localStorage.getItem("lang")) {
+        return;
+      }
+      let lang = JSON.parse(window.localStorage.getItem("lang"));
+      ctx.commit("changeLang", lang);
     },
   },
+  getters: {
+    getAddSheet (state) {
+      return state.lang[state.selectedLang].ADDSHEET;  
+    },
+    getlang (state) {
+      return state.lang[state.selectedLang].LANG;  
+    },
+  },
+  modules: {
+    notes,
+  }
 })

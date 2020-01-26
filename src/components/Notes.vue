@@ -15,7 +15,7 @@
           @blur="changeTitleBox" />
    <span  v-else 
           @click="changeTitleBox">
-   {{getNotes[keyNote].titleNote}}
+   {{title}}
    </span>
 
    <textarea v-if="showContent"
@@ -25,10 +25,9 @@
    </textarea>
    <div v-else
         @click="changeContentBox">
-   {{getNotes[keyNote].content}}
+   {{content}}
    </div>
    <button @dblclick="deleteNote(keyNote)">X</button>
-{{keyNote}}
  </div>
 </template>
 
@@ -51,19 +50,19 @@ export default {
     ...mapGetters({
         getNotes: "getNotesArray",
     }),
+    title () {
+      return this.getNotes[this.keyNote].titleNote;
+    },
+    content () {
+      return this.getNotes[this.keyNote].content;
+    },
   },
   methods: {
     changeTitleBox (){
-      if (!this.showTitle){
-        this.showTitle = true;
-      } else 
-      return this.showTitle = false;
+     this.showTitle = !this.showTitle
     },
     changeContentBox () {
-      if (!this.showContent){
-        this.showContent = true;
-      } else 
-      return this.showContent = false;
+      this.showContent = !this.showContent
     },
     bigDiv (){
       this.showdiv = true;
@@ -74,6 +73,14 @@ export default {
     ...mapActions({
       deleteNote: "deleteNote",
     }),
+  },
+  watch: {
+    title () {
+       window.localStorage.setItem("notes-array", JSON.stringify(this.getNotes));
+    },
+    content () {
+       window.localStorage.setItem("notes-array", JSON.stringify(this.getNotes));
+    }
   },
 }
 </script>

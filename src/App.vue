@@ -1,11 +1,15 @@
 <template>
   <div id="app">
-   <button v-on:click.prevent="addNote(keyNote)" 
+   <button v-on:click.prevent="addNote" 
            class="button_addNote">
-    Add Note
+    {{addSheet}}
    </button>
+
+   <lang-menu> </lang-menu> 
    
-   <notes v-for="(note, noteKey) in getNotes" :key="noteKey" :keyNote="noteKey"> 
+   <notes v-for="(note, noteKey) in getNotes" 
+          :key="noteKey" 
+          :keyNote="noteKey"> 
    </notes>
 
   </div>
@@ -15,6 +19,7 @@
 
 import { mapGetters, mapActions, mapMutations } from "vuex";
 import Notes from './components/Notes.vue';
+import langMenu from './components/langMenu'
 
 export default {
   data() {
@@ -24,10 +29,12 @@ export default {
   },
   components: {
     Notes,
+    langMenu,
   },
   computed: {
     ...mapGetters({
       getNotes: "getNotesArray",
+      addSheet: "getAddSheet",
     }),
   },
   methods:{
