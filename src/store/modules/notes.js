@@ -7,6 +7,7 @@ export default {
       state.notesArray.push({
         titleNote: 'title',
         content: 'зміст',
+        color: 'white',
       })
     },
     startNotesArray(state, arr){
@@ -14,6 +15,9 @@ export default {
     },
     deleteNotesArray(state, key){
       state.notesArray.splice(key, 1)
+    },
+    addColor(state, payload){
+      state.notesArray[payload.key].color = payload.color
     },
   },
   actions: {
@@ -28,7 +32,7 @@ export default {
       if(confirm("Delete?")){
       ctx.commit("deleteNotesArray", key);
       }
-    }
+    },
   },
   getters: {
     getNotesArray(state) {

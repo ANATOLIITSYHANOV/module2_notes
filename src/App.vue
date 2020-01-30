@@ -5,13 +5,14 @@
     {{addSheet}}
    </button>
 
-   <lang-menu> </lang-menu> 
-   
+   <div class="div-clear"></div>
+
+   <lang-menu/>
+
    <notes v-for="(note, noteKey) in getNotes" 
           :key="noteKey" 
           :keyNote="noteKey"> 
    </notes>
-
   </div>
 </template>
 
@@ -61,14 +62,34 @@ export default {
  margin: 0;
  }
  #app{
-   background: linear-gradient(45deg, rgb(243, 217, 217), rgba(151, 176, 196, 0.8));
+   background: linear-gradient(45deg, rgba(255, 232, 21, 0.7), rgba(120, 192, 252, 0.7)),url(../public/gerb-vinnici.png);
+   background-position: center;
+   background-repeat: no-repeat;
    min-height: 100vh;
+   position: relative;
  }
- .button_addNote{
-   margin: 0 auto 20px;
-   box-shadow: 0px 0px 28px 5px rgba(0, 0, 0, 0.75);
+ .div-clear{
+   height: 14vh;
  }
  button{
-   display: block;
+   cursor: pointer;
+   background-color: rgb(221, 31, 38);
+   color: rgb(255, 255, 255);
+   font-size: 24px;
+   border: none;
+   outline: none;
+   box-shadow: 0px 0px 18px 5px rgba(0, 0, 0, 0.55);
+   border-radius: 10px;
+   padding: 5px 10px;
+   display: inline-block;
+ }
+ button:hover{
+   background-color: rgb(255, 255, 255);
+   color: rgb(221, 31, 38);
+ }
+ .button_addNote{
+   position: absolute;
+   top: 3%;
+   left: 3%;
  }
 </style>

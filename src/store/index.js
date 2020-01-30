@@ -20,7 +20,7 @@ export default new Vuex.Store({
         LANG: "RU",
       },
     },
-    selectedLang: 'en',
+    selectedLang: 'ua',
   },
   mutations: {
     changeLang (state, lang) {
@@ -29,10 +29,10 @@ export default new Vuex.Store({
   },
   actions: {
     startLang (ctx) {
-      if(!window.localStorage.getItem("lang")) {
+      if(!window.localStorage.getItem("lang-notes")) {
         return;
       }
-      let lang = JSON.parse(window.localStorage.getItem("lang"));
+      let lang = JSON.parse(window.localStorage.getItem("lang-notes"));
       ctx.commit("changeLang", lang);
     },
   },

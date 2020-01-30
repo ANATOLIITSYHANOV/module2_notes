@@ -1,5 +1,5 @@
 <template>
-  <nav>
+  <nav class="lang-button">
     <button v-if="showbutton"
             @click="showbutton=!showbutton">
     {{lang}}</button>
@@ -33,7 +33,7 @@ export default {
     changeLang (lang) {
       this.mutationLang(lang);
       this.showbutton = true;
-      window.localStorage.setItem("lang", JSON.stringify(lang));
+      window.localStorage.setItem("lang-notes", JSON.stringify(lang));
     },
     ...mapActions ({
       startLang: "startLang",
@@ -45,8 +45,11 @@ export default {
 }
 </script>
 
-<style scoped>
-div button {
+<style>
+.lang-button{
   display: inline-block;
+  position: absolute;
+  top: 3%;
+  right: 3%;
 }
 </style>

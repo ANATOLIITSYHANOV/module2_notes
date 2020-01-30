@@ -1,12 +1,14 @@
 <template>
  <div class="note_div"  
-      :class="{'show_div': showdiv}"
-      @click="bigDiv">
+      :class="[{'show_div': showdiv}, color]"
+      @dblclick="bigDiv">
 
-   <button @dblclick="smallDiv"
+   <button @click="smallDiv"
            title="dblclick">
     Y 
    </button>
+
+   <button @click="deleteNote(keyNote)" id="button-delete">X</button>
    
    <input v-focus 
           type="text"
@@ -27,13 +29,22 @@
         @click="changeContentBox">
    {{content}}
    </div>
-   <button @dblclick="deleteNote(keyNote)">X</button>
+   
+   <div class="div-calor div-calor_main"
+        :class="color"
+        v-if="showColor"
+        @click="showColor=!showColor"></div>
+   <div v-else class="container-div-calor">
+   <div class="div-calor div-calor_red" @click="changeColor('red')"></div>
+   <div class="div-calor div-calor_green" @click="changeColor('green')"></div>
+   <div class="div-calor div-calor_white" @click="changeColor('white')"></div>
+   </div>
  </div>
 </template>
 
 <script>
 
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions, mapMutations } from "vuex";
 
 export default {
   data (){
@@ -41,6 +52,7 @@ export default {
      showTitle: false,
      showContent: false,
      showdiv: false,
+     showColor: true,
      }
   },
   props:{
@@ -56,6 +68,9 @@ export default {
     content () {
       return this.getNotes[this.keyNote].content;
     },
+    color () {
+      return this.getNotes[this.keyNote].color;
+    }
   },
   methods: {
     changeTitleBox (){
@@ -73,6 +88,16 @@ export default {
     ...mapActions({
       deleteNote: "deleteNote",
     }),
+    ...mapMutations({
+      addColor: "addColor",
+    }),
+    changeColor(color) {
+      this.addColor({
+        key: this.keyNote,
+        color: color,
+      });
+      this.showColor = true;
+    }
   },
   watch: {
     title () {
@@ -80,7 +105,10 @@ export default {
     },
     content () {
        window.localStorage.setItem("notes-array", JSON.stringify(this.getNotes));
-    }
+    },
+    color () {
+       window.localStorage.setItem("notes-array", JSON.stringify(this.getNotes));
+    },
   },
 }
 </script>
@@ -93,9 +121,61 @@ export default {
    height: 400px;
    margin-left: 3.333%;
    margin-bottom: 20px;
-   background-color: rgb(233, 231, 193) ;
    box-shadow: 0px 0px 28px 5px rgba(0, 0, 0, 0.75);
    border-radius: 10px;
+   position: relative;
+ }
+ #button-delete{
+   position: absolute;
+   top: 3%;
+   right: 3%;
+   font-size: 18px;
+ }
+ .white{
+   background-color: rgb(233, 231, 193) ;
+ }
+ .green{
+   background-color: aqua;
+ }
+ .red{
+   background-color: red;
+ }
+ .container-div-calor{
+   position: absolute;
+   bottom: 3%;
+   right: 3%;
+ }
+ .div-calor{
+   width: 15px;
+   height: 15px;
+   border-radius: 50%;
+   cursor: pointer;
+   display: inline-block;
+   margin-left: 2px;
+ }
+ .div-calor:hover{
+   transform: scale(1.1, 1.1);
+ }
+ .div-calor_red{
+   background-color: red;
+ }
+ .div-calor_green{
+   background-color: green;
+ }
+ .div-calor_white{
+   background-color: white;
+ }
+ .div-calor_main{
+   height: 11px;
+   width: 11px;
+   border: 4px solid  rgb(221, 31, 38);
+   position: absolute;
+   bottom: 3%;
+   right: 3%;
+ }
+ .div-calor_main:hover{
+   transform: scale(1.3, 1.3);
+   border: 4px solid  white;
  }
  span{
    display: block;
