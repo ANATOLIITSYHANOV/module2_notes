@@ -38,8 +38,7 @@
      </textarea>
      <div v-else
         @click="changeContentBox"
-        class="textarea-content"
-        contenteditable="true">
+        class="textarea-content">
       {{content}}
      </div>
    </div>
@@ -139,6 +138,15 @@ export default {
    border-radius: 10px;
    position: relative;
  }
+ .show_div{
+   width: 98%;
+   height: 98%;
+   position: fixed;
+   z-index: 1;
+   top: 1%;
+   left: 1%;
+   margin-left: 0;
+ }
  .small-big-button{
    background-color: inherit;
    height: 11px;
@@ -234,14 +242,5 @@ export default {
    outline: none;
    font-size: 22px;
    white-space: pre-wrap;
- }
-.show_div{
-   width: 98%;
-   height: 98%;
-   position: fixed;
-   z-index: 1;
-   top: 1%;
-   left: 1%;
-   margin-left: 0;
  }
 </style>
