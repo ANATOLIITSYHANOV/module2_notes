@@ -29,7 +29,7 @@ export default {
       ctx.commit("startNotesArray", arr);
     },
     deleteNote(ctx, key) {
-      if(confirm("Delete?")){
+      if(confirm(`${ctx.getters.getDelete}`)){
       ctx.commit("deleteNotesArray", key);
       }
     },

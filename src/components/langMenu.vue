@@ -49,7 +49,7 @@ export default {
 .lang-button{
   display: inline-block;
   position: absolute;
-  top: 3%;
+  top: 20px;
   right: 3%;
 }
 </style>

@@ -10,14 +10,17 @@ export default new Vuex.Store({
       en: {
         ADDSHEET: "ADD SHEET",
         LANG: "EN",
+        DELETESHEET: "Delete sheet?",
       },
       ua: {
         ADDSHEET: "ДОДАТИ АРКУШ",
         LANG: "UA",
+        DELETESHEET: "Видалити аркуш?",
       },
       ru: {
         ADDSHEET: "ДОБАВИТЬ ЛИСТ",
         LANG: "RU",
+        DELETESHEET: "Удалить лист?",
       },
     },
     selectedLang: 'ua',
@@ -42,6 +45,9 @@ export default new Vuex.Store({
     },
     getlang (state) {
       return state.lang[state.selectedLang].LANG;  
+    },
+    getDelete (state) {
+      return state.lang[state.selectedLang].DELETESHEET; 
     },
   },
   modules: {

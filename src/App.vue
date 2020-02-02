@@ -59,7 +59,8 @@ export default {
 
 <style>
  body{
- margin: 0;
+   margin: 0;
+   font-family: 'Roboto', sans-serif;
  }
  #app{
    background: linear-gradient(45deg, rgba(255, 232, 21, 0.7), rgba(120, 192, 252, 0.7)),url(../public/gerb-vinnici.png);
@@ -89,7 +90,7 @@ export default {
  }
  .button_addNote{
    position: absolute;
-   top: 3%;
+   top: 20px;
    left: 3%;
  }
 </style>

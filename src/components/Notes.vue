@@ -3,31 +3,45 @@
       :class="[{'show_div': showdiv}, color]"
       @dblclick="bigDiv">
 
-   <button @click="smallDiv"
-           title="dblclick">
-    Y 
-   </button>
+   <div @click="bigDiv"
+        title="dblclick"
+        class="small-big-button button-big"
+        v-if="!showdiv">
+   </div>
+   <div @click="smallDiv"
+        class="small-big-button button-small"
+        v-else>
+   </div>
 
    <button @click="deleteNote(keyNote)" id="button-delete">X</button>
    
-   <input v-focus 
+   <div class="content-container">
+     <div class="cont-contain_divwidth">
+       <input v-focus 
           type="text"
           v-model="getNotes[keyNote].titleNote"
           v-if="showTitle" 
-          @blur="changeTitleBox" />
-   <span  v-else 
-          @click="changeTitleBox">
-   {{title}}
-   </span>
-
-   <textarea v-if="showContent"
+          @blur="changeTitleBox"
+          class="input-content" 
+          maxlength="30"/>
+       <span  v-else 
+          @click="changeTitleBox"
+          class="input-content">
+        {{title}}
+       </span>
+     </div> 
+     <textarea v-if="showContent"
              v-focus
              v-model="getNotes[keyNote].content"
-             @blur="changeContentBox">
-   </textarea>
-   <div v-else
-        @click="changeContentBox">
-   {{content}}
+             @blur="changeContentBox"
+             class="textarea-content">
+     </textarea>
+     <div v-else
+        @click="changeContentBox"
+        class="textarea-content"
+        contenteditable="true">
+      {{content}}
+     </div>
    </div>
    
    <div class="div-calor div-calor_main"
@@ -80,7 +94,7 @@ export default {
       this.showContent = !this.showContent
     },
     bigDiv (){
-      this.showdiv = true;
+      this.showdiv = !this.showdiv;
     },
     smallDiv (){
       this.showdiv = false;
@@ -118,27 +132,44 @@ export default {
 .note_div{
    display: inline-block;
    width: 45%;
-   height: 400px;
+   height: 75vh;
    margin-left: 3.333%;
    margin-bottom: 20px;
    box-shadow: 0px 0px 28px 5px rgba(0, 0, 0, 0.75);
    border-radius: 10px;
    position: relative;
  }
+ .small-big-button{
+   background-color: inherit;
+   height: 11px;
+   width: 11px;
+   border: 4px solid  rgb(221, 31, 38);
+   position: absolute;
+   bottom: 3%;
+   left: 3%;
+   cursor: pointer;
+ }
+.button-big:hover{
+  transform: scale(1.1, 1.1);
+}
+.button-small:hover{
+  transform: scale(0.8, 0.8);
+}
  #button-delete{
    position: absolute;
    top: 3%;
    right: 3%;
-   font-size: 18px;
+   font-size: 14px;
+   box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.75);
  }
  .white{
-   background-color: rgb(233, 231, 193) ;
+   background: linear-gradient(45deg, rgba(255, 255, 255), rgba(233, 231, 193));
  }
  .green{
-   background-color: aqua;
+   background: linear-gradient(45deg, rgb(162, 252, 174), rgb(139, 247, 112));
  }
  .red{
-   background-color: red;
+   background: linear-gradient(45deg, rgb(253, 179, 179), rgb(255, 140, 140));
  }
  .container-div-calor{
    position: absolute;
@@ -174,27 +205,43 @@ export default {
    right: 3%;
  }
  .div-calor_main:hover{
-   transform: scale(1.3, 1.3);
-   border: 4px solid  white;
+   transform: scale(1.1, 1.1);
  }
- span{
+ .content-container{
+   width: 92%;
+   height: 90%;
+   margin-top: 30px;
+   overflow: hidden;
+ }
+ .cont-contain_divwidth{
+   height: 50px;
+ }
+ .input-content{
    display: block;
+   outline: none;
+   background: inherit;
+   border: none;
+   font-size: 28px;
+   margin-left: 80px;
+   height: 30px;
  }
-.display_none{
-   display: none;
+ .textarea-content{
+   margin: 0 0 0 50px;
+   width: 90%;
+   min-height: 70vh;
+   display: block;
+   background: inherit;
+   outline: none;
+   font-size: 22px;
+   white-space: pre-wrap;
  }
-textarea{
-  width: 90%;
-  min-height: 60%;
-  display: block;
-}
 .show_div{
    width: 98%;
-    height: 98%;
-    position: fixed;
-    z-index: 1;
-    top: 1%;
-    left: 1%;
-    margin-left: 0;
+   height: 98%;
+   position: fixed;
+   z-index: 1;
+   top: 1%;
+   left: 1%;
+   margin-left: 0;
  }
 </style>
