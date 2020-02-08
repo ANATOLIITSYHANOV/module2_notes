@@ -1,7 +1,6 @@
 <template>
  <div class="note_div"  
-      :class="[{'show_div': showdiv}, color]"
-      @dblclick="bigDiv">
+      :class="[{'show_div': showdiv}, color]">
 
    <div @click="bigDiv"
         title="dblclick"
@@ -15,42 +14,54 @@
 
    <button @click="deleteNote(keyNote)" id="button-delete">X</button>
    
-   <div class="content-container">
-     <div class="cont-contain_divwidth">
-       <input v-focus 
-          type="text"
-          v-model="getNotes[keyNote].titleNote"
-          v-if="showTitle" 
-          @blur="changeTitleBox"
-          class="input-content" 
-          maxlength="30"/>
-       <span  v-else 
-          @click="changeTitleBox"
-          class="input-content">
+   
+   <div class="contain_title">
+      <input v-focus 
+             type="text"
+             v-model="getNotes[keyNote].titleNote"
+             v-if="showTitle" 
+             @blur="changeTitleBox"
+             class="input-content" 
+             maxlength="25"/>
+      <span  v-else 
+             @click="changeTitleBox"
+             class="input-content">
         {{title}}
-       </span>
-     </div> 
-     <textarea v-if="showContent"
-             v-focus
-             v-model="getNotes[keyNote].content"
-             @blur="changeContentBox"
-             class="textarea-content">
+      </span>
+   </div>
+   <div class="contain_content"> 
+      <textarea v-if="showContent"
+                v-focus
+                v-model="getNotes[keyNote].content"
+                @blur="changeContentBox"
+                class="textarea-content textarea"
+                wrap="off"
+                :style="fontSize">
      </textarea>
      <div v-else
         @click="changeContentBox"
-        class="textarea-content">
-      {{content}}
+        class="textarea-content"
+        :style="fontSize">
+      <i>{{content}}</i>
      </div>
    </div>
+   
    
    <div class="div-calor div-calor_main"
         :class="color"
         v-if="showColor"
-        @click="showColor=!showColor"></div>
+        @click="showColor=!showColor">
+   </div>
    <div v-else class="container-div-calor">
-   <div class="div-calor div-calor_red" @click="changeColor('red')"></div>
-   <div class="div-calor div-calor_green" @click="changeColor('green')"></div>
-   <div class="div-calor div-calor_white" @click="changeColor('white')"></div>
+     <div class="div-calor div-calor_red" @click="changeColor('red')"></div>
+     <div class="div-calor div-calor_green" @click="changeColor('green')"></div>
+     <div class="div-calor div-calor_white" @click="changeColor('white')"></div>
+   </div>
+
+   <div class="container-fontsize">
+     <button class="button-fontsize" @click="decrement(keyNote)">-</button>
+     {{getNotes[this.keyNote].fontSize}}
+     <button class="button-fontsize" @click="increment(keyNote)">+</button>
    </div>
  </div>
 </template>
@@ -83,7 +94,10 @@ export default {
     },
     color () {
       return this.getNotes[this.keyNote].color;
-    }
+    },
+    fontSize() {
+      return `font-size: ${this.getNotes[this.keyNote].fontSize}px;`;
+    },
   },
   methods: {
     changeTitleBox (){
@@ -103,6 +117,8 @@ export default {
     }),
     ...mapMutations({
       addColor: "addColor",
+      increment: "incrementFontSize",
+      decrement: "decrementFontSize",
     }),
     changeColor(color) {
       this.addColor({
@@ -122,6 +138,9 @@ export default {
     color () {
        window.localStorage.setItem("notes-array", JSON.stringify(this.getNotes));
     },
+    fontSize() {
+       window.localStorage.setItem("notes-array", JSON.stringify(this.getNotes));
+    },
   },
 }
 </script>
@@ -130,13 +149,14 @@ export default {
 <style >
 .note_div{
    display: inline-block;
-   width: 45%;
-   height: 75vh;
-   margin-left: 3.333%;
+   width: 48.5%;
+   height: 80vh;
+   margin-left: 1%;
    margin-bottom: 20px;
-   box-shadow: 0px 0px 28px 5px rgba(0, 0, 0, 0.75);
+   box-shadow: 0px 0px 12px 5px rgba(0, 0, 0, 0.75);
    border-radius: 10px;
    position: relative;
+   overflow: hidden;
  }
  .show_div{
    width: 98%;
@@ -153,8 +173,8 @@ export default {
    width: 11px;
    border: 4px solid  rgb(221, 31, 38);
    position: absolute;
-   bottom: 3%;
-   left: 3%;
+   top: 2%;
+   left: 2%;
    cursor: pointer;
  }
 .button-big:hover{
@@ -165,8 +185,8 @@ export default {
 }
  #button-delete{
    position: absolute;
-   top: 3%;
-   right: 3%;
+   top: 2%;
+   right: 2%;
    font-size: 14px;
    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.75);
  }
@@ -181,8 +201,8 @@ export default {
  }
  .container-div-calor{
    position: absolute;
-   bottom: 3%;
-   right: 3%;
+   bottom: 1%;
+   right: 2%;
  }
  .div-calor{
    width: 15px;
@@ -209,38 +229,68 @@ export default {
    width: 11px;
    border: 4px solid  rgb(221, 31, 38);
    position: absolute;
-   bottom: 3%;
-   right: 3%;
+   bottom: 1%;
+   right: 2%;
  }
  .div-calor_main:hover{
    transform: scale(1.1, 1.1);
  }
- .content-container{
-   width: 92%;
-   height: 90%;
-   margin-top: 30px;
-   overflow: hidden;
+ .contain_title{
+   margin: 40px 0 0 65px;
+   height: 45px;
+   width: 80%;
  }
- .cont-contain_divwidth{
-   height: 50px;
+ .contain_content{
+   position: relative;
+   overflow: auto;
+   width: 90%;
+   height: 80%;
+   margin: 0 0 10px 45px;
  }
  .input-content{
    display: block;
    outline: none;
    background: inherit;
    border: none;
-   font-size: 28px;
-   margin-left: 80px;
-   height: 30px;
+   font-size: 22px;
+   padding: 5px 0;
+   width: 100%;
  }
  .textarea-content{
-   margin: 0 0 0 50px;
-   width: 90%;
-   min-height: 70vh;
    display: block;
    background: inherit;
-   outline: none;
-   font-size: 22px;
+   font-size: 19px;
    white-space: pre-wrap;
+   position: absolute;
+   top: 0;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   letter-spacing: 1px;
+   line-height: normal;
+   font-family: 'Roboto', sans-serif;
+   padding: 1px;
+ }
+ .textarea{
+   width: 98%;
+   resize: none;
+   border: none;
+   outline: none;
+ }
+ i{
+   font-style: normal;
+ }
+ .container-fontsize{
+   position: absolute;
+   bottom: 1%;
+   left: 2%;
+   font-size: 17px;
+ }
+ .button-fontsize{
+   font-size: 12px;
+   box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
+   border-radius: 1px;
+   padding: 1px;
+   width: 15px;
  }
 </style>

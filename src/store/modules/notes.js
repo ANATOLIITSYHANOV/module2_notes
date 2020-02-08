@@ -5,9 +5,10 @@ export default {
   mutations: {
     addNote(state) {
       state.notesArray.push({
-        titleNote: 'title',
-        content: 'зміст',
+        titleNote: '(ᵔ.ᵔ)',
+        content: '¬‿¬',
         color: 'white',
+        fontSize: 19,
       })
     },
     startNotesArray(state, arr){
@@ -18,6 +19,12 @@ export default {
     },
     addColor(state, payload){
       state.notesArray[payload.key].color = payload.color
+    },
+    incrementFontSize(state, key){
+      state.notesArray[key].fontSize++
+    },
+    decrementFontSize(state, key){
+      state.notesArray[key].fontSize--
     },
   },
   actions: {
