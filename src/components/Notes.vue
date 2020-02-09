@@ -1,4 +1,5 @@
 <template>
+<transition name="transition-notes" appear>
  <div class="note_div"  
       :class="[{'show_div': showdiv}, color]">
 
@@ -64,6 +65,7 @@
      <button class="button-fontsize" @click="increment(keyNote)">+</button>
    </div>
  </div>
+</transition>
 </template>
 
 <script>
@@ -150,7 +152,7 @@ export default {
 .note_div{
    display: inline-block;
    width: 48.5%;
-   height: 80vh;
+   height: 70vh;
    margin-left: 1%;
    margin-bottom: 20px;
    box-shadow: 0px 0px 12px 5px rgba(0, 0, 0, 0.75);
@@ -162,7 +164,7 @@ export default {
    width: 98%;
    height: 98%;
    position: fixed;
-   z-index: 1;
+   z-index: 3;
    top: 1%;
    left: 1%;
    margin-left: 0;
@@ -181,7 +183,7 @@ export default {
   transform: scale(1.1, 1.1);
 }
 .button-small:hover{
-  transform: scale(0.8, 0.8);
+  transform: scale(0.9, 0.9);
 }
  #button-delete{
    position: absolute;
@@ -292,5 +294,16 @@ export default {
    border-radius: 1px;
    padding: 1px;
    width: 15px;
+ }
+ .transition-notes-enter-active{
+   animation: transition-notes-in 0.4s;
+ }
+ @keyframes transition-notes-in{
+   0%{
+     transform: scale(.7)
+   }
+   100%{
+     transform: scale(1)
+   }
  }
 </style>

@@ -89,8 +89,9 @@ export default {
    color: rgb(221, 31, 38);
  }
  .button_addNote{
-   position: absolute;
+   position: fixed;
    top: 20px;
    left: 3%;
+   z-index: 2;
  }
 </style>

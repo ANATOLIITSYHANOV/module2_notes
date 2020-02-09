@@ -8,7 +8,7 @@ export default {
         titleNote: '(ᵔ.ᵔ)',
         content: '¬‿¬',
         color: 'white',
-        fontSize: 19,
+        fontSize: 14,
       })
     },
     startNotesArray(state, arr){
