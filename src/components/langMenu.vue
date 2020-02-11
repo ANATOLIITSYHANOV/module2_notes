@@ -56,10 +56,10 @@ export default {
   right: 3%;
 }
 .transition-lang-enter-active {
-  transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  transition: all .1s cubic-bezier(1.0, 0.5, 0.8, 1.0);
 }
 .transition-lang-leave-active {
-  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0);
 }
 .transition-lang-enter, .transition-lang-leave-to {
   transform: translateX(10px);

@@ -1,10 +1,10 @@
 <template>
 <transition name="transition-notes" appear>
  <div class="note_div"  
-      :class="[{'show_div': showdiv}, color]">
+      :class="color"
+      v-if="!showdiv">
 
    <div @click="bigDiv"
-        title="dblclick"
         class="small-big-button button-big"
         v-if="!showdiv">
    </div>
@@ -64,6 +64,74 @@
      {{getNotes[this.keyNote].fontSize}}
      <button class="button-fontsize" @click="increment(keyNote)">+</button>
    </div>
+ </div>
+ 
+ <div v-else>
+  <transition name="transition-notes_big" appear>
+  <div :class="color"
+      class="note_div-big">
+   <div @click="bigDiv"
+        class="small-big-button button-big"
+        v-if="!showdiv">
+   </div>
+   <div @click="smallDiv"
+        class="small-big-button button-small"
+        v-else>
+   </div>
+
+   <button @click="deleteNote(keyNote)" id="button-delete">X</button>
+   
+   
+   <div class="contain_title">
+      <input v-focus 
+             type="text"
+             v-model="getNotes[keyNote].titleNote"
+             v-if="showTitle" 
+             @blur="changeTitleBox"
+             class="input-content" 
+             maxlength="25"/>
+      <span  v-else 
+             @click="changeTitleBox"
+             class="input-content">
+        {{title}}
+      </span>
+   </div>
+   <div class="contain_content contain_content_big"> 
+      <textarea v-if="showContent"
+                v-focus
+                v-model="getNotes[keyNote].content"
+                @blur="changeContentBox"
+                class="textarea-content textarea textarea_big"
+                wrap="off"
+                :style="fontSize">
+     </textarea>
+     <div v-else
+        @click="changeContentBox"
+        class="textarea-content"
+        :style="fontSize">
+      <i>{{content}}</i>
+     </div>
+   </div>
+   
+   
+   <div class="div-calor div-calor_main"
+        :class="color"
+        v-if="showColor"
+        @click="showColor=!showColor">
+   </div>
+   <div v-else class="container-div-calor">
+     <div class="div-calor div-calor_red" @click="changeColor('red')"></div>
+     <div class="div-calor div-calor_green" @click="changeColor('green')"></div>
+     <div class="div-calor div-calor_white" @click="changeColor('white')"></div>
+   </div>
+
+   <div class="container-fontsize">
+     <button class="button-fontsize" @click="decrement(keyNote)">-</button>
+     {{getNotes[this.keyNote].fontSize}}
+     <button class="button-fontsize" @click="increment(keyNote)">+</button>
+   </div>
+  </div>
+  </transition>
  </div>
 </transition>
 </template>
@@ -160,7 +228,7 @@ export default {
    position: relative;
    overflow: hidden;
  }
- .show_div{
+ .note_div-big{
    width: 98%;
    height: 98%;
    position: fixed;
@@ -168,6 +236,9 @@ export default {
    top: 1%;
    left: 1%;
    margin-left: 0;
+   box-shadow: 0px 0px 12px 5px rgba(0, 0, 0, 0.75);
+   border-radius: 10px;
+   overflow: hidden;
  }
  .small-big-button{
    background-color: inherit;
@@ -238,16 +309,20 @@ export default {
    transform: scale(1.1, 1.1);
  }
  .contain_title{
-   margin: 40px 0 0 65px;
+   margin: 40px 0 0 55px;
    height: 45px;
    width: 80%;
  }
  .contain_content{
    position: relative;
    overflow: auto;
-   width: 90%;
-   height: 80%;
-   margin: 0 0 10px 45px;
+   width: 97%;
+   height: 77%;
+   margin: 0 0 10px 15px;
+ }
+ .contain_content_big{
+   width: 98%;
+   height: 84%;
  }
  .input-content{
    display: block;
@@ -274,10 +349,13 @@ export default {
    padding: 1px;
  }
  .textarea{
-   width: 98%;
+   width: 99.5%;
    resize: none;
    border: none;
    outline: none;
+ }
+ .textarea_big{
+   width: 100%
  }
  i{
    font-style: normal;
@@ -306,4 +384,14 @@ export default {
      transform: scale(1)
    }
  }
+.transition-notes_big-enter-active {
+  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.transition-notes_big-leave-active {
+  transition: all .4s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.transition-notes_big-enter, .transition-notes_big-leave-to{
+  transform: scale(.9);
+  opacity: 0;
+}
 </style>

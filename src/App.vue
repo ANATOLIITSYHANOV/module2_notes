@@ -79,7 +79,7 @@ export default {
    font-size: 24px;
    border: none;
    outline: none;
-   box-shadow: 0px 0px 18px 5px rgba(0, 0, 0, 0.55);
+   box-shadow: 0px 0px 12px 5px rgba(0, 0, 0, 0.75);
    border-radius: 10px;
    padding: 5px 10px;
    display: inline-block;
@@ -93,5 +93,8 @@ export default {
    top: 20px;
    left: 3%;
    z-index: 2;
+ }
+ @media screen and (max-width: 1160px){
+   
  }
 </style>
