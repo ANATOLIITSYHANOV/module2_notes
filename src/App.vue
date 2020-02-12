@@ -139,10 +139,10 @@ export default {
      width: 96.5%;
    }
    .contain_title{
-     margin: 40px 0 0 40px;
+     margin: 40px 0 0 20px;
    }
    button{
-     font-size: 20px;
+     font-size: 18px;
    }
    .contain_content_big{
      width: 98%;
@@ -163,7 +163,7 @@ export default {
      width: 100%;
    }
    .input-content{
-     font-size: 20px;
+     font-size: 19px;
    }
    .contain_content_big{
      width: 97.5%;
@@ -182,10 +182,10 @@ export default {
      margin: 0 0 10px 5px;
    }
    .contain_title{
-     margin: 40px 0 0 15px;
+     margin: 40px 0 0 10px;
    }
    .input-content{
-     font-size: 18px;
+     font-size: 17px;
    }
    .contain_content_big{
      width: 98%;
@@ -199,11 +199,11 @@ export default {
  }
  @media screen and (max-width: 550px){
    .contain_title{
-     margin: 40px 0 0 10px;
+     margin: 40px 0 0 7px;
      height: 35px;
    }
    .input-content{
-     font-size: 16px;
+     font-size: 15px;
    }
    .contain_content{
      height: 80%;
