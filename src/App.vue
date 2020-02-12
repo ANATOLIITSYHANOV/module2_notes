@@ -94,7 +94,143 @@ export default {
    left: 3%;
    z-index: 2;
  }
- @media screen and (max-width: 1160px){
-   
+ @media screen and (max-width: 1200px){
+   .contain_content{
+     width: 96.5%;
+   }
+   .textarea{
+     width: 99%;
+   }
+   .contain_content_big{
+     width: 98%;
+   }
+   .textarea_big{
+     width: 100%
+   }
+ }
+ @media screen and (max-width: 1100px){
+   .contain_content{
+     width: 96%;
+   }
+   .contain_content_big{
+     width: 98%;
+   }
+   .textarea_big{
+     width: 100%
+   }
+ }
+ @media screen and (max-width: 920px){
+   .contain_content{
+     width: 97%;
+     margin: 0 0 10px 10px;
+   }
+   .contain_content_big{
+     width: 98%;
+   }
+   .textarea_big{
+     width: 100%
+   }
+ }
+ @media screen and (max-width: 840px){
+   .note_div{
+     box-shadow: 0px 0px 6px 5px rgba(0, 0, 0, 0.75);
+   }
+   .contain_content{
+     width: 96.5%;
+   }
+   .contain_title{
+     margin: 40px 0 0 40px;
+   }
+   button{
+     font-size: 20px;
+   }
+   .contain_content_big{
+     width: 98%;
+   }
+   .textarea_big{
+     width: 100%
+   }
+ }
+ @media screen and (max-width: 700px){
+   .div-clear{
+     height: 12vh;
+   }
+   .contain_content{
+     width: 96%;
+   }
+   .contain_title{
+     margin: 40px 0 0 14px;
+     width: 100%;
+   }
+   .input-content{
+     font-size: 20px;
+   }
+   .contain_content_big{
+     width: 97.5%;
+   }
+   .textarea_big{
+     width: 99.5%
+   }
+ }
+ @media screen and (max-width: 600px){
+    button{
+     font-size: 18px;
+     box-shadow: 0px 0px 6px 5px rgba(0, 0, 0, 0.75);
+   }
+   .contain_content{
+     width: 97%;
+     margin: 0 0 10px 5px;
+   }
+   .contain_title{
+     margin: 40px 0 0 15px;
+   }
+   .input-content{
+     font-size: 18px;
+   }
+   .contain_content_big{
+     width: 98%;
+   }
+   .textarea_big{
+     width: 100%
+   }
+   .input-content_big{
+     font-size: 20px;
+   }
+ }
+ @media screen and (max-width: 550px){
+   .contain_title{
+     margin: 40px 0 0 10px;
+     height: 35px;
+   }
+   .input-content{
+     font-size: 16px;
+   }
+   .contain_content{
+     height: 80%;
+   }
+   .contain_content_big{
+     height: 85.5%;
+   }
+   .input-content_big{
+     font-size: 20px;
+   }
+ }
+ @media screen and (max-width: 480px){
+   .div-clear{
+     height: 11vh;
+   }
+   .contain_title{
+     margin: 40px 0 0 5px;
+   }
+   .input-content{
+     font-size: 14px;
+   }
+   .contain_content{
+     margin: 0 0 10px 3px;
+     width: 98%;
+   }
+   .input-content_big{
+     font-size: 19px;
+   }
  }
 </style>

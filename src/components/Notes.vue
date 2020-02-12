@@ -88,11 +88,11 @@
              v-model="getNotes[keyNote].titleNote"
              v-if="showTitle" 
              @blur="changeTitleBox"
-             class="input-content" 
+             class="input-content input-content_big" 
              maxlength="25"/>
       <span  v-else 
              @click="changeTitleBox"
-             class="input-content">
+             class="input-content input-content_big">
         {{title}}
       </span>
    </div>
@@ -317,7 +317,7 @@ export default {
    position: relative;
    overflow: auto;
    width: 97%;
-   height: 77%;
+   height: 77.5%;
    margin: 0 0 10px 15px;
  }
  .contain_content_big{
