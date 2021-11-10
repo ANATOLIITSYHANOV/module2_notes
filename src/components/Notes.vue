@@ -155,11 +155,19 @@ export default {
   computed: {
     ...mapGetters({
         getNotes: "getNotesArray",
+        getLangTitle: "getLangTitle",
+        getLangContent: "getLangContent"
     }),
     title () {
+      if (this.getNotes[this.keyNote].titleNote === ''){
+        return this.getLangTitle;
+      }
       return this.getNotes[this.keyNote].titleNote;
     },
     content () {
+      if(this.getNotes[this.keyNote].content === ''){
+        return this.getLangContent;
+      }
       return this.getNotes[this.keyNote].content;
     },
     color () {
@@ -267,10 +275,10 @@ export default {
    background: linear-gradient(45deg, rgba(255, 255, 255), rgba(233, 231, 193));
  }
  .green{
-   background: linear-gradient(45deg, rgb(162, 252, 174), rgb(139, 247, 112));
+   background: linear-gradient(45deg, rgb(220, 243, 187), rgb(187, 248, 171));
  }
  .red{
-   background: linear-gradient(45deg, rgb(253, 179, 179), rgb(255, 140, 140));
+   background: linear-gradient(45deg, rgb(253, 230, 181), rgb(250, 208, 208));
  }
  .container-div-calor{
    position: absolute;

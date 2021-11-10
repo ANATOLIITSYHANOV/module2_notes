@@ -5,8 +5,8 @@ export default {
   mutations: {
     addNote(state) {
       state.notesArray.push({
-        titleNote: '(ᵔ.ᵔ)',
-        content: '¬‿¬',
+        titleNote: '',
+        content: '',
         color: 'white',
         fontSize: 14,
       })
