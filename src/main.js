@@ -14,3 +14,6 @@ Vue.directive('focus', {
       el.focus()
   }
 })
+ /* eslint-disable no-console */
+//console.log( document.querySelector('body').style.width = w);
+/* eslint-enable no-console */

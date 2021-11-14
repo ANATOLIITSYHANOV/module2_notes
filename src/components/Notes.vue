@@ -2,7 +2,8 @@
 <transition name="transition-notes" appear>
  <div class="note_div"  
       :class="color"
-      v-if="!showdiv">
+      v-if="!showdiv"
+      :style = "heightSmallDiv">
 
    <div @click="bigDiv"
         class="small-big-button button-big"
@@ -23,7 +24,7 @@
              v-if="showTitle" 
              @blur="changeTitleBox"
              class="input-content" 
-             maxlength="25"/>
+             :maxlength="maxlength"/>
       <span  v-else 
              @click="changeTitleBox"
              class="input-content">
@@ -69,7 +70,8 @@
  <div v-else>
   <transition name="transition-notes_big" appear>
   <div :class="color"
-      class="note_div-big">
+      class="note_div-big"
+      :style = " heightBigDiv">
    <div @click="bigDiv"
         class="small-big-button button-big"
         v-if="!showdiv">
@@ -89,7 +91,7 @@
              v-if="showTitle" 
              @blur="changeTitleBox"
              class="input-content input-content_big" 
-             maxlength="25"/>
+             :maxlength="maxlength"/>
       <span  v-else 
              @click="changeTitleBox"
              class="input-content input-content_big">
@@ -151,6 +153,7 @@ export default {
   },
   props:{
     keyNote: Number,
+    deviseHeight: Number,
   },
   computed: {
     ...mapGetters({
@@ -175,6 +178,23 @@ export default {
     },
     fontSize() {
       return `font-size: ${this.getNotes[this.keyNote].fontSize}px;`;
+    },
+    maxlength() {
+      let deviceWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+      if (deviceWidth < 1400 && deviceWidth > 1100) {
+        return 20;
+      } else if (deviceWidth < 1100 && deviceWidth > 450) {
+        return 15;
+      } else if (deviceWidth < 450) {
+        return 11;
+      }
+      return 25;
+    },
+    heightSmallDiv() {
+      return `height: ${this.deviseHeight * 0.7}px;`
+    },
+    heightBigDiv() {
+      return `height: ${this.deviseHeight * 0.98}px;`
     },
   },
   methods: {
@@ -337,7 +357,7 @@ export default {
    outline: none;
    background: inherit;
    border: none;
-   font-size: 22px;
+   font-size: 30px;
    padding: 5px 0;
    width: 100%;
  }
@@ -363,7 +383,7 @@ export default {
    outline: none;
  }
  .textarea_big{
-   width: 100%
+   width: 99%
  }
  i{
    font-style: normal;

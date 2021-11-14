@@ -5,13 +5,14 @@
     {{addSheet}}
    </button>
 
-   <div class="div-clear"></div>
+   <div class="div-clear" :style = "heightDivClear"></div>
 
    <lang-menu/>
 
    <notes v-for="(note, noteKey) in getNotes" 
           :key="noteKey" 
-          :keyNote="noteKey"> 
+          :keyNote="noteKey"
+          :deviseHeight="deviseHeight"> 
    </notes>
   </div>
 </template>
@@ -26,6 +27,7 @@ export default {
   data() {
     return {
       keyNote: null,
+      deviseHeight: 0,
     }
   },
   components: {
@@ -37,6 +39,13 @@ export default {
       getNotes: "getNotesArray",
       addSheet: "getAddSheet",
     }),
+    heightDivClear() {
+      let deviceWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+      if (deviceWidth < 1024) {
+        return `height: ${Math.max(document.documentElement.clientHeight, window.innerHeight || 0) * 0.12}px;`
+      } 
+      return `height: ${Math.max(document.documentElement.clientHeight, window.innerHeight || 0) * 0.14}px;`
+    },
   },
   methods:{
     ...mapActions({
@@ -52,7 +61,8 @@ export default {
     }
   },
   mounted() {
-      this.mountNotes();
+    this.deviseHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    this.mountNotes();
   },
 }
 </script>
@@ -89,7 +99,7 @@ export default {
    color: rgb(221, 31, 38);
  }
  .button_addNote{
-   position: fixed;
+   position: absolute;
    top: 20px;
    left: 3%;
    z-index: 2;
@@ -116,7 +126,7 @@ export default {
      width: 98%;
    }
    .textarea_big{
-     width: 100%
+     width: 99%
    }
  }
  @media screen and (max-width: 920px){
@@ -128,7 +138,7 @@ export default {
      width: 98%;
    }
    .textarea_big{
-     width: 100%
+     width: 99%
    }
  }
  @media screen and (max-width: 840px){
@@ -148,28 +158,25 @@ export default {
      width: 98%;
    }
    .textarea_big{
-     width: 100%
+     width: 99%
+   }
+   .input-content{
+     font-size: 24px;
    }
  }
  @media screen and (max-width: 700px){
-   .div-clear{
-     height: 12vh;
-   }
    .contain_content{
      width: 96%;
    }
    .contain_title{
      margin: 40px 0 0 14px;
-     width: 100%;
-   }
-   .input-content{
-     font-size: 19px;
+     width: 95%;
    }
    .contain_content_big{
      width: 97.5%;
    }
    .textarea_big{
-     width: 99.5%
+     width: 99%
    }
  }
  @media screen and (max-width: 600px){
@@ -177,21 +184,22 @@ export default {
      font-size: 18px;
      box-shadow: 0px 0px 6px 5px rgba(0, 0, 0, 0.75);
    }
+    .note_div{
+     box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.75);
+   }
    .contain_content{
      width: 97%;
      margin: 0 0 10px 5px;
    }
    .contain_title{
      margin: 40px 0 0 10px;
-   }
-   .input-content{
-     font-size: 17px;
+     width: 95%;
    }
    .contain_content_big{
      width: 98%;
    }
    .textarea_big{
-     width: 100%
+     width: 99%
    }
    .input-content_big{
      font-size: 20px;
@@ -203,7 +211,7 @@ export default {
      height: 35px;
    }
    .input-content{
-     font-size: 15px;
+     font-size: 18px;
    }
    .contain_content{
      height: 80%;
@@ -216,14 +224,9 @@ export default {
    }
  }
  @media screen and (max-width: 480px){
-   .div-clear{
-     height: 11vh;
-   }
    .contain_title{
-     margin: 40px 0 0 5px;
-   }
-   .input-content{
-     font-size: 14px;
+     margin: 40px 0 0 2px;
+     width: 98%;
    }
    .contain_content{
      margin: 0 0 10px 3px;
